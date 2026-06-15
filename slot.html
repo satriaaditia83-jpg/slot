@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lucky Spin Wheel</title>
+
+<style>
+body{
+    background:#111;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin-top:30px;
+}
+
+h1{
+    font-size:40px;
+}
+
+#wheel{
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    margin:30px auto;
+    border:8px solid white;
+    transition:transform 5s ease-out;
+
+    background:conic-gradient(
+        #ff4d4d 0deg 60deg,
+        #ffd24d 60deg 120deg,
+        #4dff88 120deg 180deg,
+        #4dc3ff 180deg 240deg,
+        #b84dff 240deg 300deg,
+        #ff66b3 300deg 360deg
+    );
+}
+
+.pointer{
+    font-size:40px;
+}
+
+button{
+    padding:15px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#result{
+    margin-top:30px;
+    font-size:28px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎡 Lucky Spin Wheel 🎡</h1>
+
+<div class="pointer">⬇️</div>
+
+<div id="wheel"></div>
+
+<button onclick="spin()">PUTAR!</button>
+
+<div id="result"></div>
+
+<script>
+
+const hadiah = [
+    "💰 Rp10.000",
+    "💰 Rp50.000",
+    "🍜 Makan Bakso",
+    "😭 Zonk",
+    "🎁 Mystery Gift",
+    "🏆 JACKPOT"
+];
+
+let currentRotation = 0;
+
+function spin(){
+
+    let wheel = document.getElementById("wheel");
+    let result = document.getElementById("result");
+
+    result.innerHTML = "🎡 Memutar...";
+
+    let randomIndex = Math.floor(Math.random()*6);
+
+    let sector = 360 / 6;
+
+    let target =
+        (360 * 5) +
+        (360 - (randomIndex * sector) - (sector/2));
+
+    currentRotation += target;
+
+    wheel.style.transform =
+        `rotate(${currentRotation}deg)`;
+
+    setTimeout(() => {
+
+        result.innerHTML =
+            "🎉 Hadiah: " +
+            hadiah[randomIndex];
+
+    }, 5000);
+}
+
+</script>
+
+</body>
+</html>
