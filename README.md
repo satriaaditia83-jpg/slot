@@ -1,0 +1,2 @@
+# slot
+spin wheel
